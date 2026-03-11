@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+  background:black;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+  color:white;
+  font-family:sans-serif;
+}
+
+#button{
+  width:250px;
+  cursor:pointer;
+}
+
+#counter{
+  font-size:40px;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<img id="button" src="button.png">
+<div id="counter">0</div>
+
+<script>
+let count = 0
+const counter = document.getElementById("counter")
+
+document.getElementById("button").onclick = () => {
+  count++
+  counter.textContent = count
+}
+</script>
+
+</body>
+</html>
