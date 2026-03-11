@@ -14,12 +14,28 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:radial-gradient(circle,#111,#000);
+
   font-family:Arial,sans-serif;
   color:white;
   text-align:center;
-}
 
+  background:linear-gradient(
+    -45deg,
+    #000000,
+    #001f1f,
+    #003333,
+    #001a1a,
+    #000000
+);
+    
+  background-size:400% 400%;
+  animation:energyFlow 12s ease infinite;
+}
+@keyframes energyFlow{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
 /* title */
 
 h1{
