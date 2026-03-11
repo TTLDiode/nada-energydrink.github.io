@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
 
 body{
@@ -12,34 +14,30 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-
-  background:radial-gradient(circle at center,#0a0a0a,#000);
-  font-family:Arial, sans-serif;
+  background:radial-gradient(circle,#111,#000);
+  font-family:Arial,sans-serif;
   color:white;
+  text-align:center;
 }
 
-/* glowing title */
+/* title */
 
 h1{
-  font-size:48px;
-  letter-spacing:4px;
-  text-transform:uppercase;
+  font-size:clamp(28px,6vw,48px);
   color:#39ff14;
-
-  text-shadow:
-    0 0 10px #39ff14,
-    0 0 20px #39ff14,
-    0 0 40px #00ffea;
+  text-shadow:0 0 10px #39ff14,0 0 30px #00ffee;
 }
 
-/* button image */
+/* button */
 
 #button{
-  width:260px;
+  width:min(70vw,260px);
   cursor:pointer;
-  transition:transform .15s ease, filter .15s ease;
+  user-select:none;
+  touch-action:manipulation;
+  transition:transform .15s, filter .15s;
 
-  filter:drop-shadow(0 0 20px #00ffea);
+  filter:drop-shadow(0 0 20px #00ffee);
 }
 
 #button:hover{
@@ -50,26 +48,29 @@ h1{
   transform:scale(.95);
 }
 
-/* counter display */
+/* counter */
 
 #counter{
-  margin-top:25px;
-  font-size:56px;
-  font-weight:bold;
-  color:#00ffea;
-
-  text-shadow:
-    0 0 10px #00ffea,
-    0 0 30px #00ffea;
+  font-size:clamp(36px,8vw,60px);
+  margin-top:20px;
+  color:#00ffee;
+  text-shadow:0 0 10px #00ffee;
 }
 
-/* pulse animation when clicked */
+/* message */
+
+#message{
+  margin-top:20px;
+  font-size:clamp(16px,4vw,22px);
+  max-width:500px;
+  opacity:.9;
+}
 
 .pulse{
-  animation:pulseAnim .25s;
+  animation:pulse .25s;
 }
 
-@keyframes pulseAnim{
+@keyframes pulse{
   0%{transform:scale(1)}
   50%{transform:scale(1.15)}
   100%{transform:scale(1)}
@@ -80,22 +81,41 @@ h1{
 
 <body>
 
-<h1>ENERGY DRINK CONSUMED</h1>
+<h1>ENERGY DRINK COUNTER</h1>
 
 <img id="button" src="button.png">
 
 <div id="counter">0</div>
+<div id="message">Press the button when another one is consumed.</div>
 
 <script>
 
 let count = 0
+
 const button = document.getElementById("button")
 const counter = document.getElementById("counter")
+const message = document.getElementById("message")
+
+const jokes = {
+  1: "First one of the day. A classic opening move.",
+  5: "Five already? Heart rate increasing.",
+  10: "Doctor recommended limit has been ignored.",
+  15: "Caffeine levels: industrial.",
+  20: "Sleep is now optional.",
+  25: "This is becoming a lifestyle.",
+  30: "At this point we should call a scientist.",
+  40: "NASA could power a rocket with this.",
+  50: "Congratulations. You are now 30% caffeine."
+}
 
 button.onclick = () => {
 
   count++
   counter.textContent = count
+
+  if(jokes[count]){
+    message.textContent = jokes[count]
+  }
 
   button.classList.remove("pulse")
   void button.offsetWidth
