@@ -1,43 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+
 <style>
+
 body{
-  background:black;
+  margin:0;
+  height:100vh;
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:center;
-  height:100vh;
+  align-items:center;
+
+  background:radial-gradient(circle at center,#0a0a0a,#000);
+  font-family:Arial, sans-serif;
   color:white;
-  font-family:sans-serif;
 }
+
+/* glowing title */
+
+h1{
+  font-size:48px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:#39ff14;
+
+  text-shadow:
+    0 0 10px #39ff14,
+    0 0 20px #39ff14,
+    0 0 40px #00ffea;
+}
+
+/* button image */
 
 #button{
-  width:250px;
+  width:260px;
   cursor:pointer;
+  transition:transform .15s ease, filter .15s ease;
+
+  filter:drop-shadow(0 0 20px #00ffea);
 }
 
-#counter{
-  font-size:40px;
-  margin-top:20px;
+#button:hover{
+  transform:scale(1.08);
 }
+
+#button:active{
+  transform:scale(.95);
+}
+
+/* counter display */
+
+#counter{
+  margin-top:25px;
+  font-size:56px;
+  font-weight:bold;
+  color:#00ffea;
+
+  text-shadow:
+    0 0 10px #00ffea,
+    0 0 30px #00ffea;
+}
+
+/* pulse animation when clicked */
+
+.pulse{
+  animation:pulseAnim .25s;
+}
+
+@keyframes pulseAnim{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+  100%{transform:scale(1)}
+}
+
 </style>
 </head>
 
 <body>
 
+<h1>ENERGY DRINK CONSUMED</h1>
+
 <img id="button" src="button.png">
+
 <div id="counter">0</div>
 
 <script>
+
 let count = 0
+const button = document.getElementById("button")
 const counter = document.getElementById("counter")
 
-document.getElementById("button").onclick = () => {
+button.onclick = () => {
+
   count++
   counter.textContent = count
+
+  button.classList.remove("pulse")
+  void button.offsetWidth
+  button.classList.add("pulse")
 }
+
 </script>
 
 </body>
